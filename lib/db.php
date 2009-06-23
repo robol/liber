@@ -2,7 +2,7 @@
 // Questo file implementa la class $db, che permette di astrarre dal database usato
 // (che in questo caso è Sqlite)
 
-class $db {
+class db {
 
 	// Path del db sqlite
 	private $db_file;
@@ -25,7 +25,7 @@ class $db {
 		if( $this->num_tables() == 0 )
 		{
 			// Il database è vuoto, per cui ricreo la struttura standard (il nome della tabella è data)
-			$db->query($this->("CREATE TABLE data " . $this->db_structure . ";"))
+			$db->query("CREATE TABLE data " . $this->db_structure . ";");
 		}
 		
 		// Qui andrebbero fatti degli altri check sul database, appena sapremo che struttura deve avere.
@@ -36,7 +36,7 @@ class $db {
 	function __destruct()
 	{
 		// Restituiamo la connessione
-		unset($this->db_conn) // è veramente il metodo corretto per farlo?
+		unset($this->db_conn); // è veramente il metodo corretto per farlo?
 	}
 	
 	// Questa funzione permette di ottenere l'oggetto Sqlite
@@ -58,7 +58,7 @@ class $db {
 	{
 		$db = $this->get_connection();
 		$res = $db->query("SELECT * from sqlite_master WHERE type='table'");
-		return $res->numRows()
+		return $res->numRows();
 	}
 	
 	
