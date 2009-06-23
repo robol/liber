@@ -20,7 +20,7 @@ class db {
 		
 		// Otteniamo la connessione al database per effettuare qualche
 		// verifica preliminare
-		$dbc = $this->get_connection();
+		$db = $this->get_connection();
 		
 		if( $this->num_tables() == 0 )
 		{
