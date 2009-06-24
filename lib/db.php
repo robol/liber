@@ -106,19 +106,22 @@ class db {
 	// Restituisce 404 nel caso di post non trovato, -1 in caso di errore generico.
 	function get_post_by_id($id, $type)
 	{
+		// Effettuo la query
 		$cond = "type = '$type' AND id='$id';";
 		$res = $this->select($cond);
 		
 		// Qualche controllo di integrità
 		if( $res->numRows() == 0)
-			return 404 // Non abbiamo trovato il post!
+			return 404; // Non abbiamo trovato il post!
 		elseif( $res->numRows() > 1 )
-			return -1 // Ci sono troppi post con questo id! -- in realtà dovrebbe essere impossibile
+			return -1; // Ci sono troppi post con questo id! -- in realtà dovrebbe essere impossibile
 			
+		// A questo punto possiamo assumere che il fetch() necessario sia uno solo.
 		$post = $res->fetch();
 		
 		// Questa parte non è strettamente necessaria, ma almeno sarà comoda da modificare se dovesse
 		// cambiare la struttura del database.
+		$ret = array();
 		$ret["title"] = $post["title"];
 		$ret["body"] = $post["body"];
 		$ret["date"] = $post["date"];
