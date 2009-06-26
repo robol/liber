@@ -14,6 +14,7 @@
  *				post["body"] = "Corpo del post"
  *				post["date"] = 2009-06-24 (ad esempio)
  *				post["tags"] = array( tag1, tag2, tag3, ... )
+ *				post["author"] = "Autore del post"
  */
  
  // Convenzioni di nomenclatura:
@@ -41,7 +42,9 @@ class db {
 	private $db_conn;
 	
 	// Struttura del database, viene utilizzata per crearlo se è vuoto
-	private $db_structure = "(ind INTEGER PRIMARY KEY, title TEXT, body TEXT, tags TEXT, type TEXT)";
+	private $db_structure = "(ind INTEGER PRIMARY KEY, title TEXT, body TEXT, tags TEXT, type TEXT, author TEXT)";
+	
+	private $db_short_str = "(int, title, body, tags, type, author)";
 
 	function __construct($db_file)
 	{
@@ -126,6 +129,7 @@ class db {
 		$ret["body"] = $post["body"];
 		$ret["date"] = $post["date"];
 		$ret["tags"] = $post["tags"].explode(",");
+		$ret["author"] = $post["author"];
 		return $ret;
 	}
 	
@@ -143,6 +147,41 @@ class db {
 		return $ret;
 	}
 	
+	// Creo un nuovo post (ritorna -1 se l'id è già esistente)
+	function create_post($id, $title, $body, $date, $author)
+	{
+		$query = 'INSERT OR REPLACE INTO data ' . $this->db_short_str . ' VALUES (';
+		$query .= $id . ", ";
+		$query .= $title . ", ";
+		$query .= $body . ", ";
+		$query .= $date . ", ";
+		$query .= $author . ");"; // Fine della query
+		
+		$db = $this->get_connection();
+		if( $this->select("id = \'$id\'")->numRows() != 0 )
+			return -1; // il post è giù presente, questa NON è la funzione giusta!
+			
+		$db->query($query);
+		
+		return 0; // Ok :)
+	}
+	
+	function update_post($id, $title, $body, $date, $author)
+		{
+		// La funzione crea il post se non esiste!
+		$query = 'INSERT OR REPLACE INTO data ' . $this->db_short_str . ' VALUES (';
+		$query .= $id . ", ";
+		$query .= $title . ", ";
+		$query .= $body . ", ";
+		$query .= $date . ", ";
+		$query .= $author . ");"; // Fine della query
+		
+		$db = $this->get_connection();
+			
+		$db->query($query);
+		
+		return 0; // Ok :)
+	}
 	
 }
 
