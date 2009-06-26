@@ -129,7 +129,19 @@ class db {
 		return $ret;
 	}
 	
-	
+	// Ritorna un array di post taggati con il tag $tag
+	function get_posts_by_tag($tag)
+	{
+		$db = $this->get_connection();
+		$cond = "tag = \'$tag\'";
+		$res = $this->select($cond);
+		$ret = array();
+		while( $item = $res->fetch() )
+		{
+			$ret[$item["id"]] = $item["title"];
+		}
+		return $ret;
+	}
 	
 	
 }
