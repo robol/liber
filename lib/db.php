@@ -44,7 +44,7 @@ class db {
 	// Struttura del database, viene utilizzata per crearlo se è vuoto
 	private $db_structure = "(ind INTEGER PRIMARY KEY, title TEXT, body TEXT, tags TEXT, type TEXT, author TEXT)";
 	
-	private $db_short_str = "(int, title, body, tags, type, author)";
+	private $db_short_str = "(ind, title, body, tags, type, author)";
 
 	function __construct($db_file)
 	{
@@ -148,17 +148,18 @@ class db {
 	}
 	
 	// Creo un nuovo post (ritorna -1 se l'id è già esistente)
-	function create_post($id, $title, $body, $date, $author)
+	function create_post($ind, $title, $body, $tags, $date, $author)
 	{
 		$query = 'INSERT OR REPLACE INTO data ' . $this->db_short_str . ' VALUES (';
-		$query .= $id . ", ";
-		$query .= $title . ", ";
-		$query .= $body . ", ";
-		$query .= $date . ", ";
-		$query .= $author . ");"; // Fine della query
-		
+		$query .= $ind . ", '";
+		$query .= $title . "', '";
+		$query .= $body . "', '";
+		$query .= implode(",", $tags) . "', ";
+		$query .= $date . ", '";
+		$query .= $author . "');"; // Fine della query
+			
 		$db = $this->get_connection();
-		if( $this->select("id = \'$id\'")->numRows() != 0 )
+		if( $this->select("ind = '$ind'")->numRows() != 0 )
 			return -1; // il post è giù presente, questa NON è la funzione giusta!
 			
 		$db->query($query);
@@ -166,15 +167,16 @@ class db {
 		return 0; // Ok :)
 	}
 	
-	function update_post($id, $title, $body, $date, $author)
+	function update_post($ind, $title, $body, $tags, $date, $author)
 		{
 		// La funzione crea il post se non esiste!
 		$query = 'INSERT OR REPLACE INTO data ' . $this->db_short_str . ' VALUES (';
-		$query .= $id . ", ";
-		$query .= $title . ", ";
-		$query .= $body . ", ";
-		$query .= $date . ", ";
-		$query .= $author . ");"; // Fine della query
+		$query .= $ind . ", '";
+		$query .= $title . "', '";
+		$query .= $body . "', '";
+		$query .= implode(",", $tags) . "', ";
+		$query .= $date . ", '";
+		$query .= $author . "');"; // Fine della query
 		
 		$db = $this->get_connection();
 			
