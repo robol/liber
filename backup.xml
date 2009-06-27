@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<blog>
+
+  <post>
+    <date>1246032806</date>
+    <author>Luca</author>
+    <title>Ufficio reclami!</title>
+    <body><![CDATA[Ma perché in Italia ogni volta che leggi il giornale o dai un'occhiata ai feed sul pc scopri qualche notizia agghiacciante (<a href="http://www.corriere.it/cronache/09_giugno_27/pippo_entrava_nei_computer_dei_pm_luigi_ferrarella_9b5e6b00-62e9-11de-ac0d-00144f02aabc.shtml">leggi quella odierna</a>)? Boh! Di certo bisognare fare qualcosa per migliorare la situazione.]]></body>
+      <tags>riflessioni</tags>
+      <comments/>
+  </post>
+
+
+
+  <post>
+    <date>1246032806</date>
+    <author>Luca</author>
+    <title>Banshee e il koala karmicoo</title>
+    <body>Che delusione! Banshee sarà il player musicale di default di Ubuntu 9.10. 
+      Avrei preferito che Ubuntu adottasse una politica più simile a quella di Fedora: niente 
+      software basati su Mono nell'installazione di default.
+    </body>
+    <tags>banshee, ubuntu</tags>
+    <comments/>
+  </post>
+
+  <post>
+    <date>1245932806</date>
+    <author>Luca</author>
+    <title>Il primo computer italiano</title>
+    <body>Indovinate un po' dove è stato ideato e realizzato il primo calcolatore made in Italy: ovviamente a Pisa, 
+      la culla dell'informatica in Italia (http://www.cep.cnr.it/). 
+    </body>
+    <tags>curiosità</tags>
+    <comments/>
+  </post>
+
+  <post>
+    <date>1245832805</date>
+    <author>Luca</author>
+    <title>Oggi mi sento...lunatico</title>
+    <body><![CDATA[Gli scienziati del <a href="http://www.jpl.nasa.gov/">Jet Propulsion Laboratory</a> 
+       hanno recentemente ottenuto una mappa topografica ad alta risoluzione del polo sud lunare   
+      (http://www.nasa.gov/topics/moonmars/features/moon-20090618.html)! Non mi era mai capitato 
+      di osservare la luna così da vicino.]]>
+    </body>
+    <tags>nasa, luna</tags>
+    <comments/>
+  </post>
+
+
+  <post>
+    
+    <date>1245732805</date>
+    <author>Luca</author>
+    <title>Meccanici celesti, asteroidi e rottami spaziali</title>
+    <body>Scorrendo i feed di Wired.it mi è caduto l'occhio su un post intitolato Italian Valley: 
+      Andrea e i mecanici celesti. Il mio primo pensiero è stato: Andrea + meccanica celeste = Milani. 
+      Olé! Ho azzecato il risultato!
+      Fa sempre uno strano effetto ritrovare i volti delle persone che incroci quasi tutti i giorni in dipartimento 
+      in una rivista. Ti sembra improvvisamente che quelle persone siano in qualche modo lontanissime.
+      Per fortuna il giorno successivo tutto torna normale.      
+    </body>
+    <tags>milani</tags>
+    <comments/>
+  </post>
+
+  <post>
+    
+    <date>1245732705</date>
+    <author>Luca</author>
+    <title>Wikipedia e i video</title>
+    <body>Apprendo con gioia la notizia che Wikipedia intende implementare la funzionalità di upload
+      di contenuti video. It's legendary (chi ha visto almeno una volta "How I met your mother" avrà 
+      intuito da chi ho preso in prestito questa esclamazione)! Se questa idea si concretizzerà,
+      tra qualche anno tutti noi avremo a disposizione un enorme archivio di filmati liberamente fruibili
+      e scaricabili: un piccolo passo in avanti verso un mondo migliore.
+    </body>
+    <tags>wikipedia, video</tags>
+    <comments/>
+  </post>
+
+
+
+  <post>
+    
+    <date>1245732605</date>
+    <author>Luca</author>
+    <title>Qualche considerazione su questo blog!</title>
+    <body>Se qualcuno si stesse chiedendo: ma questa è davvero la pagina web di Luca? La risposta è sì!
+      Al momento sto sperimentando il linguaggio xml e questa pagina non è altro che un file .xml (contenuti.xml) associato
+      ad un foglio di stile (contenuti.xsl). 
+    </body>
+    <tags>blog</tags>
+    <comments/>
+  </post>
+
+
+
+  <post>
+    
+    <date>1245732505</date>
+    <author>Luca</author>
+    <title>Un'interfaccia grafica per mercurial in pyqt</title>
+    <body>Oggi ho provato a cercare se esiste un'interfaccia grafica per mercurial.  
+      In effetti esiste e si chiama hgview (http://www.logilab.org/project/name/hgview)! 
+      Per il momento non è stata ancora pacchettizzata per Debian o almeno non è stata
+      inserita in Debian testing (Squeeze). Aspetto fiducioso! :)
+    </body>
+    <tags>mercurial, pyqt</tags>
+    <comments/>
+  </post>
+
+
+
+</blog>
