@@ -147,6 +147,17 @@ class db {
 		return $ret;
 	}
 	
+	function get_posts_by_type($type)
+	{
+		$res = $this->select("type = '$type';");
+		$post = array();
+		while($data = $res->fetch() )
+		{
+			$post[$data["id"]] = $data["title"];
+		}
+		return $post;
+	}
+	
 	// Creo un nuovo post (ritorna -1 se l'id è già esistente)
 	// $post è un array associativo con i campi $id, $type, $title, $body, $tags, $date, $author
 	function create_post($post)
