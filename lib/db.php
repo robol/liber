@@ -128,7 +128,7 @@ class db {
 		$ret["title"] = $post["title"];
 		$ret["body"] = $post["body"];
 		$ret["date"] = $post["date"];
-		$ret["tags"] = $post["tags"].explode(",");
+		$ret["tags"] = explode(",", $post["tags"]);
 		$ret["author"] = $post["author"];
 		return $ret;
 	}
