@@ -42,9 +42,9 @@ class db {
 	private $db_conn;
 	
 	// Struttura del database, viene utilizzata per crearlo se è vuoto
-	private $db_structure = "(ind INTEGER PRIMARY KEY, title TEXT, body TEXT, tags TEXT, type TEXT, author TEXT)";
+	private $db_structure = "(id TEXT PRIMARY KEY, type TEXT, title TEXT, body TEXT, tags TEXT, date DATE, author TEXT)";
 	
-	private $db_short_str = "(ind, title, body, tags, type, author)";
+	private $db_short_str = "(id, type, title, body, tags, date, author)";
 
 	function __construct($db_file)
 	{
@@ -148,18 +148,23 @@ class db {
 	}
 	
 	// Creo un nuovo post (ritorna -1 se l'id è già esistente)
-	function create_post($ind, $title, $body, $tags, $date, $author)
+	// $post è un array associativo con i campi $id, $type, $title, $body, $tags, $date, $author
+	function create_post($post)
 	{
-		$query = 'INSERT OR REPLACE INTO data ' . $this->db_short_str . ' VALUES (';
-		$query .= $ind . ", '";
-		$query .= $title . "', '";
-		$query .= $body . "', '";
-		$query .= implode(",", $tags) . "', ";
-		$query .= $date . ", '";
-		$query .= $author . "');"; // Fine della query
+	
+		if($post["id"] == "")
+			return -1;
+		$query = 'INSERT OR REPLACE INTO data ' . $this->db_short_str . ' VALUES (\'';
+		$query .= $post["id"] . "', '";
+		$query .= $post["type"] . "', '";
+		$query .= $post["title"] . "', '";
+		$query .= $post["body"] . "', '";
+		$query .= implode(",", $post["tags"]) . "', ";
+		$query .= $post["date"] . ", '";
+		$query .= $post["author"] . "');"; // Fine della query
 			
 		$db = $this->get_connection();
-		if( $this->select("ind = '$ind'")->numRows() != 0 )
+		if( $this->select("id = '" . $post['id'] . "'")->numRows() != 0 )
 			return -1; // il post è giù presente, questa NON è la funzione giusta!
 			
 		$db->query($query);
@@ -167,16 +172,19 @@ class db {
 		return 0; // Ok :)
 	}
 	
-	function update_post($ind, $title, $body, $tags, $date, $author)
+	function update_post($post)
 		{
 		// La funzione crea il post se non esiste!
-		$query = 'INSERT OR REPLACE INTO data ' . $this->db_short_str . ' VALUES (';
-		$query .= $ind . ", '";
-		$query .= $title . "', '";
-		$query .= $body . "', '";
-		$query .= implode(",", $tags) . "', ";
-		$query .= $date . ", '";
-		$query .= $author . "');"; // Fine della query
+		if($post["id"] == "")
+			return -1;
+		$query = 'INSERT OR REPLACE INTO data ' . $this->db_short_str . ' VALUES (\'';
+		$query .= $post["id"] . "', '";
+		$query .= $post["type"] . "', '";
+		$query .= $post["title"] . "', '";
+		$query .= $post["body"] . "', '";
+		$query .= implode(",", $post["tags"]) . "', ";
+		$query .= $post["date"] . ", '";
+		$query .= $post["author"] . "');"; // Fine della query
 		
 		$db = $this->get_connection();
 			
