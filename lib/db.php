@@ -133,6 +133,24 @@ class db {
 		return $ret;
 	}
 	
+	// Ottiene un array con tutti i tag che ci sono nelle pagine di tipo
+	// type, oppure in tutte se type="";
+	function get_tags($type)
+	{
+		$db = $this->get_connection();
+		if($type == "")
+			$res = $db->query("SELECT tags from data;");
+		else
+			$res = $db->query("SELECT tags from data WHERE type='$type';");
+		
+		$tags = array();
+		
+		while( $buf = $res->fetch() )
+			$tags = array_merge($tags , explode(",",$buf["tags"]));
+			
+		return array_unique($tags); // Non ci interessano i duplicati.
+	}
+	
 	// Ritorna un array di post taggati con il tag $tag
 	function get_posts_by_tag($tag)
 	{
@@ -166,13 +184,13 @@ class db {
 		if($post["id"] == "")
 			return -1;
 		$query = 'INSERT OR REPLACE INTO data ' . $this->db_short_str . ' VALUES (\'';
-		$query .= $post["id"] . "', '";
-		$query .= $post["type"] . "', '";
-		$query .= $post["title"] . "', '";
-		$query .= $post["body"] . "', '";
-		$query .= implode(",", $post["tags"]) . "', ";
+		$query .= sqlite_escape_string($post["id"]) . "', '";
+		$query .= sqlite_escape_string($post["type"]) . "', '";
+		$query .= sqlite_escape_string($post["title"]) . "', '";
+		$query .= sqlite_escape_string($post["body"]) . "', '";
+		$query .= sqlite_escape_string(implode(",", $post["tags"])) . "', ";
 		$query .= $post["date"] . ", '";
-		$query .= $post["author"] . "');"; // Fine della query
+		$query .= sqlite_escape_string($post["author"]) . "');"; // Fine della query
 			
 		$db = $this->get_connection();
 		if( $this->select("id = '" . $post['id'] . "'")->numRows() != 0 )
@@ -189,13 +207,13 @@ class db {
 		if($post["id"] == "")
 			return -1;
 		$query = 'INSERT OR REPLACE INTO data ' . $this->db_short_str . ' VALUES (\'';
-		$query .= $post["id"] . "', '";
-		$query .= $post["type"] . "', '";
-		$query .= $post["title"] . "', '";
-		$query .= $post["body"] . "', '";
-		$query .= implode(",", $post["tags"]) . "', ";
+		$query .= sqlite_escape_string($post["id"]) . "', '";
+		$query .= sqlite_escape_string($post["type"]) . "', '";
+		$query .= sqlite_escape_string($post["title"]) . "', '";
+		$query .= sqlite_escape_string($post["body"]) . "', '";
+		$query .= sqlite_escape_string(implode(",", $post["tags"])) . "', ";
 		$query .= $post["date"] . ", '";
-		$query .= $post["author"] . "');"; // Fine della query
+		$query .= sqlite_escape_string($post["author"]) . "');"; // Fine della query
 		
 		$db = $this->get_connection();
 			
