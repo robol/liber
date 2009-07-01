@@ -5,19 +5,18 @@
 	// There should not be anything really liber-specific, so you are free to reuse it for
 	// you own website (even without db class), because it is release under the GPL v2 or higher
 	
+	include_once("../config.php");
+	
 	class template {
 	
-		private $tmpl_dir;
+		// Configuration array
+		private $cfg;
 	
-		// This function takes the DIR where templates file are stored;
-		function __construct($tmpl_dir)
+		function __construct()
 		{
-			if(!is_dir($tmpl_dir))
-			{
-				return -1; // This means you haven't been honest with us...
-			}
-				
-			$this->tmpl_dir = $tmpl_dir;
+			// Inizializzo la configurazione
+			$this->cfg = new config();
+			$this->cfg = $this->cfg->values;
 		}
 		
 		
@@ -37,7 +36,7 @@
 			// Remove posts, because they are not standard tags
 			for($i=0; $i<sizeof($tags); $i++)
 			{
-				if($tags[$i] == "posts")
+				if( ($tags[$i] == "posts") || ($tags[$i] == "comments") )
 					unset($tags[$i]);
 			}
 			$tags = array_values($tags);
@@ -90,13 +89,7 @@
 		
 		function get_page_by_data_type($type, $data)
 		{
-			
-			$handle = fopen($this->tmpl_dir . "/$type.tmpl" , 'r');
-			if(!$handle)
-				return -1; // I haven't been able to find the right template
-				
-			$buf = fread($handle, 255000); // Read the whole file
-			fclose($handle);
+			$buf = implode( '', file($this->cfg["template_dir"] . "/$type.tmpl" , FILE_SKIP_EMPTY_LINES));
 			
 			return $this->get_page_by_data_tmpl($buf, $data);
 		}
