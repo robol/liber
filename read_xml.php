@@ -1,5 +1,10 @@
 <?php 
 
+include 'config.php';
+
+$flag=0;
+$post_struct="";
+
 $xml=simplexml_load_file("contenuti.xml");
 
 //arrays
@@ -14,28 +19,59 @@ $comments=$xml->xpath("//comments");
 arsort($dates, SORT_NUMERIC);
 
 
-foreach ($dates as $k => $value) {
-	echo "<b>".$titles[$k]."</b><br />";	
-	echo "<p>".$bodies[$k]."</p>";
-	$date_formatted=date('Y-m-d',intval($value));		   
-	echo "<i>".$authors[$k]."</i> - <i>".$date_formatted."</i> - <i>".$tags[$k]."</i><br />";
-	
-	echo "<p>".$comments[$k]."</p>";
-	echo '<a href="add_comment.php?pos='.$k.'">Add a comment</a><p><br /></p>';	
+
+
+$lines=file($template, FILE_SKIP_EMPTY_LINES);
+
+   
+
+foreach($lines as $line){
+
+
+
+if (preg_match("/<%blog_title%>/",$line))
+   {$line=preg_replace("/<%blog_title%>/",$blog_title,$line);}
+
+if (preg_match("/<%begin_posts%>/",$line)){		
+   $line=preg_replace("/<%begin_posts%>/", '', $line);
+   $flag=1;
+   }
+
+
+
+
+if (preg_match("/<%end_posts%>/",$line)){
+   $line=preg_replace("/<%end_posts%>/", '', $line);
+   $post_struct=$post_struct.$line;
+   $flag=0;
+   foreach ($dates as $k => $value) {
+   $post=preg_replace("/<%title%>/",$titles[$k] , $post_struct);
+   $post=preg_replace("/<%author%>/",$authors[$k] , $post);
+   $post=preg_replace("/<%body%>/",$bodies[$k] , $post);
+   $post=preg_replace("/<%tags%>/",$tags[$k] , $post);
+   $date_formatted=date('Y-m-d',intval($value));
+   $post=preg_replace("/<%date%>/",$date_formatted , $post);
+   $post=preg_replace("/<%comments%>/",$comments[$k] , $post);
+   echo $post;
+   }
+
+
+   }
+
+
+if ($flag==1){
+   $post_struct=$post_struct.$line;
+   $line="";
+   }
+
+
+
+
+
+else {echo $line;}
+
 }
 
 
-
-//$date_unix=mktime();	
-
-//echo $date_unix."</br>";
-
-//$date_default=date('Y-m-d H:i:s',$date_unix);
-//echo $date_default;
-
-//echo count($titoli)."<br />";
-
-
-//print_r($dates);
 
 ?>

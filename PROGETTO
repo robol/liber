@@ -4,4 +4,12 @@
 - mettere pagina "sei sicuro di voler cancellare il post"
 - inserimento commenti
 - crezione post in xml (vedi funzioni leggi_xml.php)
-* pensare a come fare template
+- implementare template
+- configurazioni
+* rivedere la struttura per gestire meglio i commenti:
+pensavo a qualcosa del tipo:
+<comments>
+<comment></comment>
+<comment></comment>
+</comments>
+
