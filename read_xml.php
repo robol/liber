@@ -19,8 +19,9 @@ foreach ($dates as $k => $value) {
 	echo "<p>".$bodies[$k]."</p>";
 	$date_formatted=date('Y-m-d',intval($value));		   
 	echo "<i>".$authors[$k]."</i> - <i>".$date_formatted."</i> - <i>".$tags[$k]."</i><br />";
-	echo "<p>".$comments[$k]."</p><br />";
-		
+	
+	echo "<p>".$comments[$k]."</p>";
+	echo '<a href="add_comment.php?pos='.$k.'">Add a comment</a><p><br /></p>';	
 }
 
 

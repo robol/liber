@@ -28,7 +28,7 @@ foreach ($dates as $k => $value) {
 	echo "<td>$view</td>";
 	$modify='[<a href="modify_post.php?pos='.$k.'">modify</a>]';
 	echo "<td>$modify</td>";
-	$delete='[<a href="delete_post.php?pos='.$k.'">delete</a>]';
+	$delete='[<a href="request.php?pos='.$k.'">delete</a>]';
 	echo "<td>$delete</td>";
 	echo "</tr>";
 

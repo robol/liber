@@ -1,7 +1,7 @@
 [TASK]
 - cancellazione post
 - inserimento post
-* mettere pagina "sei sicuro di voler cancellare il post"
-* inserimento commenti
+- mettere pagina "sei sicuro di voler cancellare il post"
+- inserimento commenti
 - crezione post in xml (vedi funzioni leggi_xml.php)
 * pensare a come fare template
