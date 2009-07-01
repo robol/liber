@@ -1,8 +1,13 @@
 <?php
 
+$config = array(
 
-$blog_title="Liber";
+// Il titolo principale del blog
+"blog_title" => "Liber",
 
-$template='templates/example.tpl';
+// Il file del template
+"template" => 'templates/example.tmpl'
+
+);
 
 ?>
